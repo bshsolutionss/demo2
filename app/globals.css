@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
+/* Gold and charcoal palette derived from the supplied EH business logo. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f5ef;
+  --foreground: #2a2926;
+  --primary: #242424;
+  --primary-foreground: #f7f5ef;
+  --secondary: #efece4;
+  --accent: #d5b36b;
+  --accent-foreground: #242424;
+  --accent-ink: #80601e;
+  --muted: #69655f;
+  --border: #dfd9cd;
+  --surface: #eae3d5;
 }
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-ink: var(--accent-ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-display: Arial, Helvetica, sans-serif;
+  --text-display: clamp(2.5rem, 4.8vw, 4.75rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.055em;
+  --text-heading: clamp(2.1rem, 3.5vw, 3.5rem);
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.055em;
+  --text-subheading: clamp(1.5rem, 2.7vw, 2.75rem);
+  --text-subheading--line-height: 1.2;
+  --text-subheading--letter-spacing: -0.04em;
+  --spacing-section: clamp(4.5rem, 8vw, 8rem);
+  --animate-fade-in: fade-in 700ms cubic-bezier(.2,.7,.2,1) both;
+  --animate-rise-in: rise-in 700ms cubic-bezier(.2,.7,.2,1) both;
+  --animate-line-in: line-in 900ms cubic-bezier(.2,.7,.2,1) both;
+  --animate-media-drift: media-drift 24s ease-in-out infinite alternate;
+  --animate-media-in: media-in 1200ms cubic-bezier(.22,1,.36,1) both;
+  --animate-layer-float: layer-float 6s ease-in-out infinite alternate;
+  --animate-audience-type: audience-type 18s steps(28, end) infinite both;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+body { background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--primary); color: var(--primary-foreground); }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+summary::-webkit-details-marker { display: none; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes line-in { from { transform: translateY(115%); } to { transform: translateY(0); } }
+@keyframes media-drift { from { transform: scale(1.02); } to { transform: scale(1.1) translateX(1%); } }
+@keyframes media-in { from { opacity: 0; clip-path: inset(8% 0 8% 0); transform: translateY(18px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0); } }
+@keyframes layer-float { from { transform: translateY(0) rotate(-1deg); } to { transform: translateY(-8px) rotate(1deg); } }
+@keyframes audience-type {
+  0% { clip-path: inset(0 100% 0 0); opacity: 0; }
+  2% { clip-path: inset(0 100% 0 0); opacity: 1; }
+  12%, 27% { clip-path: inset(0); opacity: 1; }
+  32% { clip-path: inset(0 100% 0 0); opacity: 1; }
+  33%, 100% { clip-path: inset(0 100% 0 0); opacity: 0; }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

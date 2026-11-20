@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="720" viewBox="0 0 800 720" fill="none">
+  <defs>
+    <linearGradient id="track" x1="100" y1="560" x2="650" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#f1ecdf"/><stop offset=".47" stop-color="#d8c8a2"/><stop offset="1" stop-color="#ebe1cc"/></linearGradient>
+    <linearGradient id="seal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#484540"/><stop offset="1" stop-color="#252421"/></linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="220%"><feDropShadow dx="0" dy="13" stdDeviation="14" flood-color="#302c23" flood-opacity=".15"/></filter>
+  </defs>
+  <path d="M125 615C91 390 260 124 518 113c145-6 255 89 282 151" stroke="url(#track)" stroke-width="134" stroke-linecap="round"/>
+  <path d="M125 615C91 390 260 124 518 113c145-6 255 89 282 151" stroke="#fff" stroke-opacity=".6" stroke-width="1" stroke-dasharray="2 12"/>
+  <g filter="url(#shadow)"><circle cx="139" cy="511" r="46" fill="url(#seal)"/><path d="M121 489h27l12 12v32h-39z" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><path d="M146 490v14h14M130 515h20M130 524h13" stroke="#fff" stroke-width="3"/></g>
+  <g filter="url(#shadow)"><circle cx="264" cy="224" r="46" fill="url(#seal)"/><path d="M245 244v-31l19-13 19 13v31M253 244v-17h22v17M242 244h44" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></g>
+  <g filter="url(#shadow)"><circle cx="562" cy="116" r="46" fill="url(#seal)"/><rect x="540" y="100" width="44" height="32" rx="4" stroke="#fff" stroke-width="3"/><path d="M553 100v-7h18v7M541 114h42M558 111v7h8v-7" stroke="#fff" stroke-width="2"/></g>
+  <g fill="#2a2926" font-family="Arial,Helvetica,sans-serif"><text x="392" y="364" font-size="16" fill="#756d5c">YOUR NEXT CHAPTER</text><text x="388" y="410" font-size="38" letter-spacing="-1.5">A clearer</text><text x="388" y="455" font-size="38" letter-spacing="-1.5">way forward.</text><path d="M392 484h48" stroke="#947024" stroke-width="3"/></g>
+  <g filter="url(#shadow)"><rect x="295" y="552" width="292" height="123" rx="8" fill="#fff"/><rect x="317" y="574" width="30" height="30" rx="6" fill="#f4ecd9"/><path d="m326 589 5 5 8-10" stroke="#947024" stroke-width="2"/><text x="359" y="593" fill="#2a2926" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="bold">Built around your business</text><text x="317" y="633" fill="#736d61" font-family="Arial,Helvetica,sans-serif" font-size="12">TAX PREPARATION / BUSINESS FORMATION</text><path d="M317 650h241" stroke="#e9e7e1"/></g>
+</svg>
