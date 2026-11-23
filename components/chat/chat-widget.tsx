@@ -169,7 +169,7 @@ export function ChatWidget({ copy, links, newTab, locale }: ChatWidgetProps) {
               maxLength={500}
               autoComplete="off"
               placeholder={copy.inputPlaceholder}
-              className="min-h-11 min-w-0 flex-1 rounded-full border border-border bg-background px-4 text-sm placeholder:text-muted focus:border-accent focus:outline-none"
+              className="min-h-11 min-w-0 flex-1 rounded-full border border-border bg-background px-4 text-sm placeholder:text-muted focus:border-accent focus:outline-none focus-visible:!outline-none focus-visible:!outline-offset-0"
             />
             <button type="submit" disabled={typing || !draft.trim()} aria-label={copy.send} className="flex size-11 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground hover:bg-accent/85 disabled:opacity-40 motion-safe:transition-[opacity,transform] motion-safe:enabled:hover:scale-105">
               <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
