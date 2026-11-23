@@ -38,30 +38,63 @@
   --text-subheading--line-height: 1.2;
   --text-subheading--letter-spacing: -0.04em;
   --spacing-section: clamp(4.5rem, 8vw, 8rem);
-  --animate-fade-in: fade-in 700ms cubic-bezier(.2,.7,.2,1) both;
-  --animate-rise-in: rise-in 700ms cubic-bezier(.2,.7,.2,1) both;
-  --animate-line-in: line-in 900ms cubic-bezier(.2,.7,.2,1) both;
-  --animate-media-drift: media-drift 24s ease-in-out infinite alternate;
-  --animate-media-in: media-in 1200ms cubic-bezier(.22,1,.36,1) both;
-  --animate-layer-float: layer-float 6s ease-in-out infinite alternate;
-  --animate-audience-type: audience-type 18s steps(28, end) infinite both;
+
+  /* ── Motion system (see config/motion.ts for the rhythm) ─────────
+     emphasized = entrances, reveals and release; standard = symmetric state changes. */
+  --ease-emphasized: cubic-bezier(.22, 1, .36, 1);
+  --ease-standard: cubic-bezier(.65, 0, .35, 1);
+  --animate-fade-in: fade-in 900ms var(--ease-emphasized) both;
+  --animate-rise-in: rise-in 900ms var(--ease-emphasized) both;
+  --animate-line-in: line-in 1100ms var(--ease-emphasized) both;
+  --animate-rule-in: rule-in 1100ms var(--ease-emphasized) both;
+  /* Orbit hero, hero CTA glow and floating chat button. */
+  --animate-orbit-draw: orbit-draw 1600ms cubic-bezier(.65,0,.35,1) both;
+  --animate-node-in: node-in 700ms cubic-bezier(.34,1.56,.64,1) both;
+  --animate-node-float: node-float 6s ease-in-out infinite alternate;
+  --animate-grow-x: grow-x 1200ms var(--ease-emphasized) both;
+  --animate-cta-glow: cta-glow 2.6s cubic-bezier(.4,0,.6,1) infinite;
+  --animate-chat-float: chat-float 3.2s ease-in-out infinite;
+  --animate-chat-pulse: chat-pulse 2.4s cubic-bezier(0,0,.2,1) infinite;
+  --animate-drop-in: drop-in 450ms var(--ease-emphasized) both;
+  --animate-bubble-in: bubble-in 450ms var(--ease-emphasized) both;
+  --animate-typing: typing 1.2s ease-in-out infinite;
+  --animate-marquee: marquee 55s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 65s linear infinite;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
 ::selection { background: var(--primary); color: var(--primary-foreground); }
 :focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
 summary::-webkit-details-marker { display: none; }
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes line-in { from { transform: translateY(115%); } to { transform: translateY(0); } }
-@keyframes media-drift { from { transform: scale(1.02); } to { transform: scale(1.1) translateX(1%); } }
-@keyframes media-in { from { opacity: 0; clip-path: inset(8% 0 8% 0); transform: translateY(18px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0); } }
-@keyframes layer-float { from { transform: translateY(0) rotate(-1deg); } to { transform: translateY(-8px) rotate(1deg); } }
-@keyframes audience-type {
-  0% { clip-path: inset(0 100% 0 0); opacity: 0; }
-  2% { clip-path: inset(0 100% 0 0); opacity: 1; }
-  12%, 27% { clip-path: inset(0); opacity: 1; }
-  32% { clip-path: inset(0 100% 0 0); opacity: 1; }
-  33%, 100% { clip-path: inset(0 100% 0 0); opacity: 0; }
-}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(24px); } }
+@keyframes line-in { from { transform: translateY(110%); } }
+@keyframes rule-in { from { transform: scaleX(0); } }
+@keyframes orbit-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes node-in { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes node-float { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes cta-glow { 0%, 100% { box-shadow: 0 0 0 0 rgb(213 179 107 / .55); } 70% { box-shadow: 0 0 0 12px rgb(213 179 107 / 0); } }
+@keyframes chat-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes chat-pulse { 0% { transform: scale(1); opacity: .55; } 80%, 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes drop-in { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes bubble-in { from { opacity: 0; transform: translateY(10px); } }
+@keyframes typing { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+/* Rows hold two identical copies, so -50% lands exactly on the start of the second copy. */
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+@keyframes marquee-reverse { from { transform: translate3d(-50%, 0, 0); } to { transform: translate3d(0, 0, 0); } }
+
+/* Magnetic elements ease back to rest when released (components may override the duration). */
+@layer base { [data-magnetic] { transition: translate 500ms var(--ease-emphasized); } }
+
+/* ── Scroll-driven motion (CSS only; browsers without support show the static layout) ── */
+@keyframes panel-open { from { clip-path: inset(0 max(1rem, 4%) round 2rem); } to { clip-path: inset(0 0 round 0); } }
+@keyframes parallax { from { translate: 0 -5%; } to { translate: 0 5%; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-expand { animation: panel-open linear both; animation-timeline: view(); animation-range: entry 5% cover 30%; }
+    .scroll-parallax { animation: parallax linear both; animation-timeline: view(); }
+  }
+}

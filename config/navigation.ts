@@ -1,6 +1,7 @@
+/** Locale-free paths; labels come from the dictionary `nav` section. */
 export const navigation = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { key: 'home', path: '/' },
+  { key: 'about', path: '/about' },
+  { key: 'services', path: '/services' },
+  { key: 'contact', path: '/contact' },
 ] as const;

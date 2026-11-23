@@ -1,14 +1,16 @@
 import { PageIntro } from '@/components/shared/page-intro';
-import { site } from '@/config/site';
+import { getDictionary } from '@/i18n/server';
 
-export function ServicesIntroduction() {
+export async function ServicesIntroduction() {
+  const { t } = await getDictionary();
+  const copy = t.services.intro;
   return (
     <PageIntro
-      eyebrow="Our services"
-      title={<>Tax matters. Business plans.<br />
-        <span className="text-muted">A clearer starting point.</span>
+      eyebrow={copy.eyebrow}
+      title={<>{copy.title1}<br />
+        <span className="text-muted">{copy.title2}</span>
       </>}
-      description={`U.S. tax preparation for individuals, families, and small businesses, alongside business formation guidance for entrepreneurs. Serving ${site.serviceArea} in English and Spanish.`}
+      description={copy.description}
     />
   );
 }

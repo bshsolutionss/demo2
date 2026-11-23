@@ -1,7 +1,10 @@
 import { PageIntro } from '@/components/shared/page-intro';
+import { getDictionary } from '@/i18n/server';
 
-export function AboutIntroduction() {
-  return <PageIntro eyebrow="About EH" title={<>Your Goals.<br />
-    <span className="text-muted">Our Priority.</span>
-  </>} description="EH Tax & Business Solutions provides U.S. tax preparation for individuals, families, and small businesses, along with business formation guidance for entrepreneurs. Serving Central Florida with support in English and Spanish." />;
+export async function AboutIntroduction() {
+  const { t } = await getDictionary();
+  const copy = t.about.intro;
+  return <PageIntro eyebrow={copy.eyebrow} title={<>{copy.title1}<br />
+    <span className="text-muted">{copy.title2}</span>
+  </>} description={copy.description} />;
 }

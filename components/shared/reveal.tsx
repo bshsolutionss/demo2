@@ -7,5 +7,5 @@ import { cn } from '@/lib/utils';
 interface RevealProps { children: ReactNode; className?: string; stagger?: RevealStagger; variant?: keyof typeof motion.reveal.variants; }
 export function Reveal({ children, className, stagger = 0, variant = 'rise' }: RevealProps) {
   const ref = useInView();
-  return <div ref={ref} className={cn(motion.reveal.classes, motion.reveal.variants[variant], motion.reveal.stagger[stagger], className)}>{children}</div>;
+  return <div ref={ref} className={cn('group/reveal', motion.reveal.classes, motion.reveal.variants[variant], motion.reveal.stagger[stagger], className)}>{children}</div>;
 }

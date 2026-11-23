@@ -11,8 +11,15 @@ interface NavigationLinkProps {
   onClick?: () => void;
 }
 
+/** Home (`/es`) matches exactly; section links also match nested pages and in-page anchors. */
+function isActive(pathname: string, href: string) {
+  if (pathname === href) return true;
+  const isHome = href.split('/').filter(Boolean).length === 1;
+  return !isHome && pathname.startsWith(`${href}/`);
+}
+
 export function NavigationLink({ href, label, mobile = false, onClick }: NavigationLinkProps) {
-  const active = usePathname() === href;
+  const active = isActive(usePathname(), href);
 
   return (
     <Link
@@ -22,17 +29,17 @@ export function NavigationLink({ href, label, mobile = false, onClick }: Navigat
       className={cn(
         'group/link relative flex items-center justify-between motion-safe:transition-colors',
         mobile
-          ? 'min-h-16 border-b border-white/10 py-4 text-2xl tracking-tight'
-          : 'min-h-12 px-1 text-sm font-medium',
-        active ? 'text-accent' : 'text-white/70 hover:text-white',
+          ? 'min-h-14 border-b border-white/10 py-3 text-xl tracking-tight'
+          : 'min-h-10 px-1 text-xs font-medium whitespace-nowrap',
+        active ? 'text-accent' : 'text-white/75 hover:text-white',
       )}
     >
       {label}
       {mobile ? (
-        <span aria-hidden="true" className={cn('text-lg', active ? 'text-accent' : 'text-white/30')}>{active ? '↗' : '→'}</span>
+        <span aria-hidden="true" className={cn('text-lg motion-safe:transition-transform motion-safe:group-hover/link:translate-x-1', active ? 'text-accent' : 'text-white/30')}>→</span>
       ) : (
         <span aria-hidden="true" className={cn(
-          'absolute inset-x-1 bottom-1 h-px origin-left bg-accent motion-safe:transition-transform motion-safe:duration-200',
+          'absolute inset-x-1 bottom-1.5 h-px origin-left bg-accent motion-safe:transition-transform motion-safe:duration-200',
           active ? 'scale-x-100' : 'scale-x-0 group-hover/link:scale-x-100',
         )} />
       )}

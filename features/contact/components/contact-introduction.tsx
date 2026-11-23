@@ -1,6 +1,10 @@
 import { PageIntro } from '@/components/shared/page-intro';
-export function ContactIntroduction() {
-  return <PageIntro eyebrow="Contact EH" title={<>Good conversations.<br />
-    <span className="text-muted">Clearer next steps.</span>
-  </>} description="Request an appointment by sending a direct message on Instagram. For business formation inquiries, send EMPRESA by Instagram DM or email EH." />;
+import { getDictionary } from '@/i18n/server';
+
+export async function ContactIntroduction() {
+  const { t } = await getDictionary();
+  const copy = t.contact.intro;
+  return <PageIntro eyebrow={copy.eyebrow} title={<>{copy.title1}<br />
+    <span className="text-muted">{copy.title2}</span>
+  </>} description={copy.description} />;
 }
